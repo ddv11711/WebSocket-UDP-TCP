@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 	WORD version = MAKEWORD(2, 2);
 	if (WSAStartup(version, &wsaData) != 0){
 		cout << "Error lib" << endl;
+		system("pause");
 		return 0;
 	}
 	SOCKADDR_IN server;
@@ -49,6 +50,7 @@ int main(int argc, char* argv[]) {
 	SOCKET in = socket(AF_INET, SOCK_DGRAM, NULL);
 	if (bind(in, (sockaddr*)&serverHint, sizeof(serverHint)) == SOCKET_ERROR){
 		cout << "Error can`t bind socket" << WSAGetLastError() << endl;
+		system("pause");
 		return 0;
 	}
 	SOCKADDR_IN client;
@@ -70,19 +72,13 @@ int main(int argc, char* argv[]) {
 		send(Connection, (to_string(id)).c_str(), (to_string(id)).size(), NULL);
 		if (id == 0 || id == -1)break;
 	}
-	ofstream fout(NameFile + ".txt");
 	ofstream fout2(catalog+R"(\)" + NameFile + ".txt");
-	if (!fout.is_open()){
-		cout << "Error file does not open" << endl;
-		return 0;
-	}
 	if (!fout2.is_open()) {
 		cout << "Error file does not open2" << endl;
+		system("pause");
 		return 0;
 	}
-	fout << str;
 	fout2 << str;
-	fout.close();
 	fout2.close(); 
 	recv(Connection, msg, sizeof(msg), NULL);
 	str = msg;

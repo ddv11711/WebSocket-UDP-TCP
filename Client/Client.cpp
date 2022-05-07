@@ -30,6 +30,7 @@ int main(int argc, char* argv[]){
 	ifstream fin(way);
 	if (!fin.is_open()) { 
 		cout << "Error file does not open" << endl; 
+		system("pause");
 		return 0;
 	}
 	fin >> message;
@@ -39,6 +40,7 @@ int main(int argc, char* argv[]){
 	WORD DLLVersion = MAKEWORD(2, 2);
 	if (WSAStartup(DLLVersion, &wsaData) != 0){
 		cout << "Error lib" << endl;
+		system("pause");
 		return 0;
 	}
 	SOCKADDR_IN addr;
@@ -49,6 +51,7 @@ int main(int argc, char* argv[]){
 	SOCKET sListen = socket(AF_INET, SOCK_STREAM, NULL);
 	if (bind(sListen, (SOCKADDR*)&addr, sizeofaddr) == SOCKET_ERROR){
 		cout << "Error can`t bind socket " << WSAGetLastError() << endl;
+		system("pause");
 		return 0;
 	}
 	listen(sListen, SOMAXCONN);
